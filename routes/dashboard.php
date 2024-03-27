@@ -20,8 +20,9 @@ Route::group([
     Route::put('/categories/trash/{category}/restore',[CategoriesController::class,'restore'])->name('categories.restore');
     Route::delete('/categories/trash/{category}/',[CategoriesController::class,'forseDelete'])->name('categories.forceDeleted');
     Route::get('/categories/trash',[CategoriesController::class,'trash'])->name('categories.trash');
-    Route::resource('/categories',CategoriesController::class);
-
+    Route::post('/categories/update/{category}',[CategoriesController::class,'update'])->name('categories.update');
+    Route::post('/categories/get/by/id/{category}',[CategoriesController::class,'getById'])->name('getById');
+    Route::resource('/categories',CategoriesController::class)->except('update');
     // Route::get('/categories', [CategoriesController::class, 'index'])
     // ->name('index');
     // Route::get('/categories/create',[CategoriesController::class,'create'])

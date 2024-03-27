@@ -14,7 +14,6 @@ class AuthenticatedSessionController extends Controller
     protected $guard = 'web';
 
     public function __construct(Request $request){
-
         if($request->is('Admin/*')){
         $this->guard = 'admin';
 

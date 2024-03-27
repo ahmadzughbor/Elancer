@@ -11,8 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>AdminLTE 3 | Top Navigation</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     @if( LaravelLocalization::getCurrentLocaleDirection() == 'rtl' )
     <link rel="stylesheet" href="{{ asset('assets/dashboard/plugins/fontawesome-free/css/all.min.rtl.css') }}">
@@ -23,23 +22,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset('assets/dashboard/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{asset('assets/herio/style.css')}}">
     <link rel="stylesheet" href="{{asset('assets/herio/colors/blue.css')}}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body class="hold-transition layout-top-nav">
+
+<body class="hold-transition layout-top-nav" >
     <div class="wrapper">
 
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="color: #7469B6; text-decoration-color: #7469B6; ">
             <div class="container">
-                <a href="../../index3.html" class="navbar-brand">
-                    <img src="{{ asset('assets/dashboard/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-                        class="brand-image img-circle elevation-3" style="opacity: .8">
-                    <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <a href="#" class="navbar-brand">
+                    <img src="{{ asset('assets/dashboard/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <span class="brand-text font-weight-light"><b> ZCX lancer</b></span>
                 </a>
 
-                <button class="navbar-toggler order-1" type="button" data-toggle="collapse"
-                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -47,68 +47,67 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- Left navbar links -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="index3.html" class="nav-link">{{ __('Home') }}</a>
+                            <a href="#" class="nav-link">{{ __('Home') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('client.projects.index')}}" class="nav-link">Dashboard</a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">{{ __('Contact') }}</a>
                         </li>
-                        <li  class="nav-item">
-                            <ul class="navbar-nav">
-                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                    <li  class="nav-item">
-                                        <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                            {{ $properties['native'] }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
+                        <li aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                            <li><a rel="alternate" class="dropdown-item" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    {{ $properties['native'] }}
+                                </a></li>
+                            <!-- <li  class="nav-item">
+                                            
+                                            </li> -->
+                            @endforeach
                         </li>
-                        <li class="nav-item dropdown">
-                            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" class="nav-link dropdown-toggle">Dropdown</a>
+                        <li class="nav-item">
+
+
+                        </li>
+                        <!-- <li class="nav-item dropdown">
+                            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dropdown</a>
                             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                                 <li><a href="#" class="dropdown-item">Some action </a></li>
                                 <li><a href="#" class="dropdown-item">Some other action</a></li>
 
-                                <li class="dropdown-divider"></li>
+                                <li class="dropdown-divider"></li> -->
 
                                 <!-- Level two dropdown-->
-                                <li class="dropdown-submenu dropdown-hover">
-                                    <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false"
-                                        class="dropdown-item dropdown-toggle">Hover for action</a>
+                                <!-- <li class="dropdown-submenu dropdown-hover">
+                                    <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
                                     <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
                                         <li>
                                             <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-                                        </li>
+                                        </li> -->
 
                                         <!-- Level three dropdown-->
-                                        <li class="dropdown-submenu">
-                                            <a id="dropdownSubMenu3" href="#" role="button"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                class="dropdown-item dropdown-toggle">level 2</a>
-                                            <ul aria-labelledby="dropdownSubMenu3"
-                                                class="dropdown-menu border-0 shadow">
+                                        <!-- <li class="dropdown-submenu">
+                                            <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
+                                            <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
                                                 <li><a href="#" class="dropdown-item">3rd level</a></li>
                                                 <li><a href="#" class="dropdown-item">3rd level</a></li>
                                             </ul>
-                                        </li>
+                                        </li> -->
                                         <!-- End Level three -->
-
+<!-- 
                                         <li><a href="#" class="dropdown-item">level 2</a></li>
                                         <li><a href="#" class="dropdown-item">level 2</a></li>
-                                    </ul>
-                                </li>
+                                    </ul> -->
+                                <!-- </li> -->
                                 <!-- End Level two -->
-                            </ul>
-                        </li>
+                            <!-- </ul>
+                        </li> -->
                     </ul>
 
                     <!-- SEARCH FORM -->
                     <form class="form-inline ml-0 ml-md-3">
                         <div class="input-group input-group-sm">
-                            <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                aria-label="Search">
+                            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
                             <div class="input-group-append">
                                 <button class="btn btn-navbar" type="submit">
                                     <i class="fas fa-search"></i>
@@ -130,13 +129,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="#" class="dropdown-item">
                                 <!-- Message Start -->
                                 <div class="media">
-                                    <img src="{{ asset('assets/dashboard/dist/img/user1-128x128.jpg') }}"
-                                        alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                    <img src="{{ asset('assets/dashboard/dist/img/user1-128x128.jpg') }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                     <div class="media-body">
                                         <h3 class="dropdown-item-title">
                                             Brad Diesel
-                                            <span class="float-right text-sm text-danger"><i
-                                                    class="fas fa-star"></i></span>
+                                            <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
                                         </h3>
                                         <p class="text-sm">Call me whenever you can...</p>
                                         <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago
@@ -149,13 +146,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="#" class="dropdown-item">
                                 <!-- Message Start -->
                                 <div class="media">
-                                    <img src="{{ asset('assets/dashboard/dist/img/user8-128x128.jpg') }}"
-                                        alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                    <img src="{{ asset('assets/dashboard/dist/img/user8-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                     <div class="media-body">
                                         <h3 class="dropdown-item-title">
                                             John Pierce
-                                            <span class="float-right text-sm text-muted"><i
-                                                    class="fas fa-star"></i></span>
+                                            <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
                                         </h3>
                                         <p class="text-sm">I got your message bro</p>
                                         <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago
@@ -168,13 +163,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="#" class="dropdown-item">
                                 <!-- Message Start -->
                                 <div class="media">
-                                    <img src="{{ asset('assets/dashboard/dist/img/user3-128x128.jpg') }}"
-                                        alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                    <img src="{{ asset('assets/dashboard/dist/img/user3-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                     <div class="media-body">
                                         <h3 class="dropdown-item-title">
                                             Nora Silvester
-                                            <span class="float-right text-sm text-warning"><i
-                                                    class="fas fa-star"></i></span>
+                                            <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
                                         </h3>
                                         <p class="text-sm">The subject goes here</p>
                                         <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago
@@ -189,17 +182,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
                     <!-- Notifications Dropdown Menu -->
                     @auth
-                        <x-notification-menu />
+                    <x-notification-menu />
                     @endauth
 
-                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    {{-- <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a> --}}
             </div>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                     <i class="fas fa-th-large"></i>
                 </a>
-            </li>
+            </li> --}}
             </ul>
     </div>
     </nav>
@@ -208,7 +201,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <div class="content-header">
+        {{-- <div class="content-header">
             <div class="container">
                 <div class="row mb-2">
                     <div class="col-sm-6">
@@ -217,37 +210,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">{{ __('Home') }}</a></li>
-                            <li class="breadcrumb-item"><a href="#">{{ __('Layout') }}</a></li>
-                            <li class="breadcrumb-item active">Top Navigation</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
+        <li class="breadcrumb-item"><a href="#">{{ __('Layout') }}</a></li>
+        <li class="breadcrumb-item active">Top Navigation</li>
+        </ol>
+    </div><!-- /.col -->
+    </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+    </div> --}}
+    <!-- /.content-header -->
 
-        <!-- Main content -->
-        <div class="content">
+    <!-- Main content -->
+    <div class="content"style="background-color: #7469B6;">
 
-            {{ $slot ?? 'HI' }}
+        {{ $slot ?? 'HI' }}
 
-        </div>
-        <!-- ./wrapper -->
+    </div>
+    <!-- ./wrapper -->
 
-        <!-- REQUIRED SCRIPTS -->
+    <!-- REQUIRED SCRIPTS -->
 
-        <!-- jQuery -->
-        <script src="{{ asset('assets/dashboard/plugins/jquery/jquery.min.js') }}"></script>
-        <!-- Bootstrap 4 -->
-        <script src="{{ asset('assets/dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-        <!-- AdminLTE App -->
-        <script src="{{ asset('assets/dashboard/dist/js/adminlte.min.js') }}"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="{{ asset('assets/dashboard/dist/js/demo.js') }}"></script>
-        <script>
-            const userId = "{{ Auth::id() }}"
-        </script>
-        <script src="{{ asset('/js/app.js') }}"></script>
+    <!-- jQuery -->
+    <script src="{{ asset('assets/dashboard/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('assets/dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('assets/dashboard/dist/js/adminlte.min.js') }}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <!-- <script src="{{ asset('assets/dashboard/dist/js/demo.js') }}"></script> -->
+    <script>
+        const userId = "{{ Auth::id() }}"
+    </script>
+    <script src="{{ asset('/js/app.js') }}"></script>
 </body>
 
 </html>

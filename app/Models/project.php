@@ -45,12 +45,12 @@ class project extends Model
         ];
     }
 
-    public static function booted()
-    {
-        static::addGlobalScope('active', function (Builder $builder) {
-            $builder->where('status', '=', 'open');
-        });
-    }
+    // public static function booted()
+    // {
+    //     static::addGlobalScope('active', function (Builder $builder) {
+    //         $builder->where('status', '=', 'open');
+    //     });
+    // }
     public function scopeHourly(Builder $builder)
     {
         $builder->where('type','hourly');
@@ -128,7 +128,7 @@ class project extends Model
             'freelancer_id',
 
         )->withPivot([
-            'cost', 'type', 'status', 'start_on', 'end_on', 'completed_on', 'hours'
+            'freelancer_id','project_id','description','cost','status'
         ]);
     }
     public function contractedFreelancers()

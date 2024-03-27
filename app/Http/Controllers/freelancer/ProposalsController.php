@@ -28,6 +28,18 @@ class ProposalsController extends Controller
         ]);
 
     }
+    public function received()
+    {
+        $user = Auth::guard('web')->user();
+        // $proposals =  $user->with('projects.proposals')->paginate();
+        $projects = project::Where('user_id',$user->id)->with('proposals')->paginate();
+        // $proposals =  $user->proposals()->with('project')->latest()->paginate();
+        return view('freelancer.proposals.receivedProp', [
+            // 'proposals'=>  $proposals,
+            'projects'=> $projects,
+        ]);
+
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -53,35 +65,35 @@ class ProposalsController extends Controller
     public function store(Request $request,$project_id)
     {
         $project =  project::findOrFail($project_id);
-        //dd($project);
-        if($project->status !== 'open'){
+        
+        // dd($project);
+        if($project->status != 'open'){
             return  redirect()->route('freelancer.proposals.index')->with('error','you can not submit prposal to this porject');
         }
         $user= Auth::guard('web')->user();
-        if( $user->proposedProjects->find($project->id)){
-            return  redirect()->route('freelancer.proposals.index')->with('error','you already submitted prposal to this porject');
-        }
-        //dd($project);
-        $request->validate([
+        // if( $user->proposedProjects->find($project->id)){
+        //     return  redirect()->route('freelancer.proposals.index')->with('error','you already submitted prposal to this porject');
+        // }
+        // dd($project);
+        $validatedData  = $request->validate([
             'description' => ['required','string'],
             'cost' =>['required','numeric','min:1'],
             'duration' =>['required','int','min:1'],
             'duration_unit' =>['required','in:day,month,week,year'],
         ]);
+    
         //dd($project);
-        $request->merge([
-            'project_id'=> $project_id,
-            // 'status'=>'pending',
-        ]);
+        $validatedData['project_id' ]= $project_id;
 
-        $proposal = $user->proposals()->create($request->all());
-
+        
+        $proposal = $user->proposals()->updateOrCreate($validatedData);
         $project->user->notify(new NewProposalNotification($proposal,$user));
         $admins  = Admin::all();
         Notification::send($admins,new NewProposalNotification($proposal,$user));
-
-        return redirect()->route('projects.show',$project->id )
-        ->with('success',' your proposal has been submitted');
+        
+        return redirect()->route('Home')->with('success',' your proposal has been submitted');
+        // return redirect()->route('client.projects.show',$project->id )
+        // ->with('success',' your proposal has been submitted');
     }
 
 
@@ -104,7 +116,17 @@ class ProposalsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project =  project::findOrFail($id);
+        $proposal = Auth::user()->proposals()->where('project_id' , $id)->first();
+
+        return view('freelancer.proposals.create', [
+            'proposal'=> $proposal,
+            'project'=> $project,
+            'units'=> Proposal::units(),
+        ]);
+
+
+
     }
 
     /**
@@ -125,8 +147,14 @@ class ProposalsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($project)
     {
-        //
+        $proposal = Auth::user()->proposals()->where('project_id' , $project)->first();
+        if( $proposal != null){
+            $proposal->delete();
+            return redirect()->back()->with('success',' your proposal has been Deleted');
+        }else{
+            return redirect()->back()->with('error',' You have an error');
+        }
     }
 }

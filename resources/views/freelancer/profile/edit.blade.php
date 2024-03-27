@@ -35,11 +35,11 @@
                 <!-- /.card -->
 
                 <!-- About Me Box -->
-                <div class="card card-primary">
+                <!-- <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">About Me</h3>
                     </div>
-                    <!-- /.card-header -->
+                
                     <div class="card-body">
                         <strong><i class="fas fa-book mr-1"></i> Education</strong>
 
@@ -71,8 +71,7 @@
 
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
                     </div>
-                    <!-- /.card-body -->
-                </div>
+                </div> -->
                 <!-- /.card -->
             </div>
             <!-- /.col -->
@@ -80,12 +79,12 @@
                 <div class="card">
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
-                            <li class="nav-item"><a class="nav-link " href="#settings" data-toggle="tab">Settings</a></li>
+                            <li class="nav-item"><a  class="nav-link " href="#settings" data-toggle="tab">Settings</a></li>
                         </ul>
                     </div><!-- /.card-header -->
                     <div class="card-body">
                         <div class="tab-content">
-                            <div class="tab-pane" id="settings">
+                            <div class="tab-pane active" id="settings">
                                 <form class="form-horizontal">
                                     <div class="form-group row">
                                         <label for="inputName" class="col-sm-2 col-form-label">firstName</label>

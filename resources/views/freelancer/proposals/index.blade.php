@@ -1,4 +1,4 @@
-<x-front-layout >
+<x-app-layout >
     <!-- Main content -->
     <section class="content-header">
                 <div class="container-fluid">
@@ -8,7 +8,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">{{__('Home')}}</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('Home')}}">{{__('Home')}}</a></li>
                                 <li class="breadcrumb-item active">{{__('User Profile')}}</li>
                             </ol>
                         </div>
@@ -64,7 +64,10 @@
                                 category : {{$proposal->category->parent->name}} / {{$proposal->category->name}}
                             </td> --}}
                             <td class="proposal_progress">
-
+                            <div class="progress progress-sm">
+                                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                                    </div>
+                                </div>
 
                             </td>
                             <td class="proposal-state">
@@ -76,16 +79,18 @@
                                     </i>
                                     {{__('View')}}
                                 </a>
-                                <a class="btn btn-info btn-sm" href="">
+                                <a class="btn btn-info btn-sm" href="{{route('freelancer.proposals.edit',['project' => $proposal->project->id ])}}">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     {{__('Edit')}}
                                 </a>
-                                <a class="btn btn-danger btn-sm" href="">
+                                @if($proposal->status == 'pending')
+                                <a class="btn btn-danger btn-sm" href="{{route('freelancer.proposals.delete',['project' => $proposal->project->id ])}}">
                                     <i class="fas fa-trash">
                                     </i>
                                     {{__('Delete')}}
                                 </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

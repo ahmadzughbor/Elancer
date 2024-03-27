@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\dashboard;
 
-use App\Http\Controllers\Controller;
 use App\Models\category;
 use App\Rules\filterRule;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
@@ -18,17 +19,17 @@ class CategoriesController extends Controller
         'art_file' => ['nulable', 'image'],
     ];
     //Actions
-    public function __construct()
-    {
-        $this->authorizeResource(category::class);
-    }
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(category::class);
+    // }
     public function index($id = 0)
     {
         // if(!Gate::allows('categories.view')){
         //     return abort(403);
         // };
 
-        $this->authorize('viewAny', category::class);
+        // $this->authorize('viewAny', category::class);
         //$categories =  DB::table('categories')->get();
         // $categories = category::get();
         $categories = category::leftJoin('categories as parents', 'parents.id', '=', 'categories.parent_id')
@@ -36,10 +37,12 @@ class CategoriesController extends Controller
                 'categories.*',
                 'parents.name as parent_name'
             ])->paginate(4);
-
+            $parent = category::all();
         $title = 'categories';
+        // dd($categories);
         return view('categories.index', [
             'categories' => $categories,
+            'parent' => $parent,
             'title' => 'categories',
             //'flashMassege'=>session('success')
         ]);
@@ -76,38 +79,54 @@ class CategoriesController extends Controller
         }
         $category = category::create($data);
 
-        return  redirect()
-            ->route('categories.index')
-            ->with('success', 'category created');
+        return response()->json([
+            'status' => 200,
+            'type' => '1'
+        ]);
+        // return  redirect()
+        //     ->route('categories.index')
+        //     ->with('success', 'category created');
     }
     public function edit(category $category)
     {
 
-        $this->authorize('update',$category);
+        // $this->authorize('update',$category);
         // $category = DB::table('categories')->where('id', '=', $id)->first();
         $parents = category::all();
         return view('categories.edit', compact('category', 'parents'));
     }
-    public function update(Request $request, category $category)
+    public function update(Request $request, $category)
     {
-
-        $this->authorize('update',$category);
-        $clean = $request->validate($this->rules);
+        // $this->authorize('update',$category);
+        $category1 =category::where('id',$category)->first();
+        // $clean = $request->validate($this->rules);
         // $category->name = $request->input('name');
         // $category->description = $request->input('description');
         // $category->slug = str::slug($request->input('name'));
         // $category->parent_id = $request->input('parent_id');
         // $category->save();\
-        $category->update($request->all());
-        $data = $request->all();
+        // $categoryUp = category::where('id', $category);
+        $category1->update($request->all());
+        // $data = $request->all();
         // if( ! $data['slug'])
         // {
         //     $data['slug']=str::slug($data('name'));
         // }
         // $category = category::create($data);
 
+        return response()->json([
+            'data' => $category1,
+            'status' => 200 ,
+            'type' => '2'
+        ]);
+        // return  redirect()->route('categories.index')->with('success', 'category updated');
+    }
 
-        return  redirect()->route('categories.index')->with('success', 'category updated');
+    public function getById(Request $request, $category){
+        // dd($category);
+
+        $data = category::where('id',$category)->first();
+        return response()->json($data);
     }
 
     public function trash()
